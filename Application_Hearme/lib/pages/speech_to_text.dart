@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class TranscriptionAudioPage extends StatefulWidget {
@@ -17,6 +16,15 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Transcription Audio en Texte'),
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(40),
+          child: Image.asset(
+            'lib/assets/audi_en_texte.png',
+            height: 100,
+            width: 100,
+          ),
+        ),
       ),
       body: Center(
         child: Column(
@@ -28,15 +36,19 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
             ),
             SizedBox(height: 20),
             Text('Texte transcrit : $_text'),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _activateBluetooth,
-              child: Text('Activer le Bluetooth'),
-            ),
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _transcribeViaBluetooth,
+        child: Icon(Icons.bluetooth),
+      ),
     );
+  }
+
+  void _transcribeViaBluetooth() {
+    // Code pour afficher les réseaux Bluetooth disponibles et se connecter
+    // Vous pouvez utiliser les plugins Bluetooth Flutter pour cela
   }
 
   void _listen() async {
@@ -64,26 +76,10 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
       });
     }
   }
-
-  void _activateBluetooth() async {
-    try {
-      // Activer le Bluetooth
-      await BluetoothActivator.activateBluetooth();
-      print('Bluetooth activé avec succès');
-    } catch (e) {
-      print('Erreur lors de l\'activation du Bluetooth: $e');
-    }
-  }
 }
 
-class BluetoothActivator {
-  static const MethodChannel _channel = MethodChannel('bluetooth_activator');
-
-  static Future<void> activateBluetooth() async {
-    try {
-      await _channel.invokeMethod('activateBluetooth');
-    } on PlatformException catch (e) {
-      throw 'Erreur lors de l\'activation du Bluetooth: ${e.message}';
-    }
-  }
+void main() {
+  runApp(MaterialApp(
+    home: TranscriptionAudioPage(),
+  ));
 }
