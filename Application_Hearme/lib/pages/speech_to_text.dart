@@ -15,14 +15,19 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transcription Audio en Texte'),
+        title: Column(
+          children: [
+            SizedBox(height: 20), // Espace entre le titre et l'image
+            Text('Transcription Audio en Texte'),
+          ],
+        ),
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(40),
+          preferredSize: Size.fromHeight(320), // Taille de l'image réduite
           child: Image.asset(
             'lib/assets/audi_en_texte.png',
-            height: 100,
-            width: 100,
+            height: 300, // Taille de l'image réduite
+            width: 300, // Taille de l'image réduite
           ),
         ),
       ),
@@ -36,6 +41,11 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
             ),
             SizedBox(height: 20),
             Text('Texte transcrit : $_text'),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _transcribeViaBluetooth,
+              child: Text('Connexion via Bluetooth'),
+            ),
           ],
         ),
       ),

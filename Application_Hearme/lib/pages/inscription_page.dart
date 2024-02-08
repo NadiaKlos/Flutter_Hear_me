@@ -1,6 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class InscriptionPage extends StatelessWidget {
+class InscriptionPage extends StatefulWidget {
+  @override
+  _InscriptionPageState createState() => _InscriptionPageState();
+}
+
+class _InscriptionPageState extends State<InscriptionPage> {
+  final TextEditingController _sexeController = TextEditingController();
+  final TextEditingController _nomController = TextEditingController();
+  final TextEditingController _prenomController = TextEditingController();
+  final TextEditingController _mailController = TextEditingController();
+  final TextEditingController _mdpController = TextEditingController();
+  
+  // Ajoutez les autres contrôleurs pour les champs du formulaire de la même manière
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,52 +33,31 @@ class InscriptionPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               TextFormField(
+                controller: _sexeController,
                 decoration: InputDecoration(labelText: 'Sexe'),
               ),
               SizedBox(height: 10),
               TextFormField(
+                controller: _nomController,
                 decoration: InputDecoration(labelText: 'Nom'),
               ),
               SizedBox(height: 10),
               TextFormField(
+                controller: _prenomController,
                 decoration: InputDecoration(labelText: 'Prénom'),
               ),
-              SizedBox(height: 10),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Age'),
+                controller: _mailController,
+                decoration: InputDecoration(labelText: 'Adresse mail'),
               ),
-              SizedBox(height: 10),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Adresse postale'),
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Code postal'),
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Ville'),
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Adresse e-mail'),
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                obscureText: true,
+                controller: _mdpController,
                 decoration: InputDecoration(labelText: 'Mot de passe'),
               ),
-              SizedBox(height: 10),
-              TextFormField(
-                obscureText: true,
-                decoration: InputDecoration(labelText: 'Confirmer le mot de passe'),
-              ),
+              // Ajoutez les autres champs du formulaire de la même manière
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  // Action à effectuer lors de la soumission du formulaire
-                  print('Formulaire d\'inscription soumis');
-                },
+                onPressed: _submitForm,
                 child: Text('S\'inscrire'),
               ),
             ],
@@ -73,4 +66,49 @@ class InscriptionPage extends StatelessWidget {
       ),
     );
   }
+
+  void _submitForm() async {
+    // Récupérer les données du formulaire
+    String sexe = _sexeController.text;
+    String nom = _nomController.text;
+    String prenom = _prenomController.text;
+    String mail = _mailController.text;
+    String mdp = _mdpController.text;
+    // Ajoutez les autres champs du formulaire de la même manière
+
+    try {
+      // Ajouter les données à Firestore
+      await FirebaseFirestore.instance.collection('users').add({
+        'sexe': sexe,
+        'nom': nom,
+        'prenom': prenom,
+        'mail': mail,
+        'mdp': mdp,
+        // Ajouter les autres champs du formulaire de la même manière
+      });
+
+      // Afficher un message de succès
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Inscription réussie')),
+      );
+
+      // Effacer les champs du formulaire après l'inscription réussie
+      _sexeController.clear();
+      _nomController.clear();
+      _prenomController.clear();
+      // Effacer les autres champs du formulaire de la même manière
+    } catch (e) {
+      // Afficher un message d'erreur s'il y a un problème lors de l'inscription
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erreur lors de l\'inscription')),
+      );
+      print('Erreur lors de l\'inscription : $e');
+    }
+  }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: InscriptionPage(),
+  ));
 }
