@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'inscription_page.dart'; // Importer la classe de votre page d'inscription
 import 'login_page.dart'; // Importer la classe de votre page de connexion
-import 'speech_to_text.dart';
-
+import 'menu_deroulant.dart';
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -53,10 +52,10 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                // Navigation vers la page de transcription audio
+                // Navigation vers la page avec le menu déroulant
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TranscriptionAudioPage()),
+                  MaterialPageRoute(builder: (context) => MyDropdownPage()),
                 );
               },
               child: Text('Se connecter en mode invité'),
