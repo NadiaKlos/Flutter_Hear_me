@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'speech_to_text.dart'; // Importer la classe de votre page de transcription audio
+
 class MyDropdownPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu déroulant'),
+        title: Text(''),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -17,7 +19,7 @@ class MyDropdownPage extends StatelessWidget {
             SizedBox(
               height: 200, // Hauteur de l'image
               child: Image.asset(
-                'lib/assets/interrogation.png', // Remplacez 'assets/image.png' par le chemin de votre image
+                'lib/assets/interrogation.png',
                 fit: BoxFit.cover,
               ),
             ),
@@ -26,9 +28,9 @@ class MyDropdownPage extends StatelessWidget {
               'Sélectionnez une option :',
               style: TextStyle(fontSize: 20),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             DropdownButton<String>(
-              items: <String>['Transcription', 'Statistiques', 'Info']
+              items: <String>['📝Transcription', '📉Statistiques', 'ℹ️Info']
                   .map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -36,8 +38,13 @@ class MyDropdownPage extends StatelessWidget {
                 );
               }).toList(),
               onChanged: (String? newValue) {
-                // Ajoutez ici la logique pour gérer la sélection de l'option
-                print('Option sélectionnée : $newValue');
+                // Redirection vers la page de transcription si "Transcription" est sélectionné
+                if (newValue == '📝Transcription') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TranscriptionAudioPage()),
+                  );
+                }
               },
               hint: Text('Sélectionnez une option'),
               isExpanded: true,
