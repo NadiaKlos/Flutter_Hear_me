@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'speech_to_text.dart'; // Importer la classe de votre page de transcription audio
+import 'transcription_audio_page.dart'; // Importer la classe de votre page de transcription audio
 
 class MyDropdownPage extends StatelessWidget {
   @override

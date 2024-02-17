@@ -1,10 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speech_to_text_tutorial/pages/transcription_audio_page.dart';
 import 'package:google_sign_in/google_sign_in.dart'; // Importer GoogleSignIn
 
 import 'inscription_page.dart'; // Importer la page d'inscription
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
 
-class LoginPage extends StatelessWidget {
+class _LoginPageState extends State<LoginPage> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  bool _isObscure = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isObscure = !_isObscure;
+    });
+  }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
@@ -19,6 +37,30 @@ class LoginPage extends StatelessWidget {
     } catch (error) {
       print('Erreur lors de la connexion avec Google: $error');
     }
+    
+  }
+
+  Future<void> _login(BuildContext context) async {
+    String email = emailController.text;
+    String password = passwordController.text;
+   try {
+    // final credential = 
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password
+    );
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TranscriptionAudioPage()),
+    );
+    } on FirebaseAuthException catch (e) {
+      // if (e.code == 'unknown') {
+        print('No user found for that email.');
+      // } 
+      // else if (e.code == 'wrong-password') {
+      //   print('Wrong password provided for that user.');
+      // }
+    }
   }
 
   @override
@@ -31,19 +73,35 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Adresse e-mail'),
-            ),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Mot de passe'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                print('Formulaire de connexion soumis');
-              },
-              child: Text('Se connecter'),
-            ),
+            TextField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.0),
+              TextField(
+                controller: passwordController,
+                obscureText: _isObscure,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off),
+                    onPressed: _togglePasswordVisibility,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.0),
+              ElevatedButton(
+                onPressed: () => _login(context),
+                child: Text('Se connecter'),
+              ),
             SizedBox(height: 20), // Espacement augmenté entre les boutons
             ElevatedButton.icon(
               onPressed: () => _signInWithGoogle(context),
