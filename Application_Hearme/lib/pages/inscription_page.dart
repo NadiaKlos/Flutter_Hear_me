@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speech_to_text_tutorial/pages/login_page.dart';
 
 class InscriptionPage extends StatefulWidget {
   @override
@@ -73,8 +75,34 @@ class _InscriptionPageState extends State<InscriptionPage> {
     String nom = _nomController.text;
     String prenom = _prenomController.text;
     String mail = _mailController.text;
-    String mdp = _mdpController.text;
+    String password = _mdpController.text;
     // Ajoutez les autres champs du formulaire de la même manière
+
+    
+      try {
+    print("Nadia!!!!!!!!!!!!!!!!!!");
+
+    final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: mail,
+      password: password,
+    );
+    print("Nadia222222!!!!!!!!!!!!!!!!!!");
+  } on FirebaseAuthException catch (e) {
+    print(e.code);
+    print("Nadia33333!!!!!!!!!!!!!!!!!!");
+
+    if (e.code == 'unknown'){
+      print("There is an error");
+    }
+    // if (e.code == 'weak-password') {
+    //   print('The password provided is too weak.');
+    // } else if (e.code == 'email-already-in-use') {
+    //   print('The account already exists for that email.');
+    // }
+  } catch (e) {
+    print(e);
+  }
+
 
     try {
       // Ajouter les données à Firestore
@@ -83,7 +111,7 @@ class _InscriptionPageState extends State<InscriptionPage> {
         'nom': nom,
         'prenom': prenom,
         'mail': mail,
-        'mdp': mdp,
+        // 'mdp': password,
         // Ajouter les autres champs du formulaire de la même manière
       });
 
@@ -97,6 +125,12 @@ class _InscriptionPageState extends State<InscriptionPage> {
       _nomController.clear();
       _prenomController.clear();
       // Effacer les autres champs du formulaire de la même manière
+
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
     } catch (e) {
       // Afficher un message d'erreur s'il y a un problème lors de l'inscription
       ScaffoldMessenger.of(context).showSnackBar(
