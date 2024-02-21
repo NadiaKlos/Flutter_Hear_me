@@ -11,7 +11,7 @@ class MyDropdownPage extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.lightBlue[100], // Fond bleu clair
+          color: Color.fromARGB(255, 240, 239, 240), 
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

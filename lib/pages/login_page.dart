@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
       if (googleUser != null) {
         print('Connecté avec Google: ${googleUser.displayName}');
         // Rediriger l'utilisateur vers la page suivante après la connexion réussie
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => NextPage()));
+         Navigator.push(context, MaterialPageRoute(builder: (context) => TranscriptionAudioPage()));
       } else {
         print('Connexion avec Google annulée');
       }

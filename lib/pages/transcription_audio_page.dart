@@ -62,7 +62,7 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
   
     // Récupérer les périphériques Bluetooth disponibles
     List<BluetoothDevice> devices = [];
-    flutterBlue.startScan(timeout: Duration(seconds: 4));
+    flutterBlue.startScan(timeout: Duration(seconds: 60));
     flutterBlue.scanResults.listen((List<ScanResult> results) {
       for (ScanResult result in results) {
         devices.add(result.device);
@@ -70,7 +70,7 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
     });
 
     // Arrêter la recherche après un certain temps (par exemple, 10 secondes)
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 60));
     flutterBlue.stopScan();
   
     // Afficher les périphériques Bluetooth disponibles
