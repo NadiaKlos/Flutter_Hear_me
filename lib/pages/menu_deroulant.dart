@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'info.dart'; // Importer la classe de votre page d'informations
 import 'transcription_audio_page.dart'; // Importer la classe de votre page de transcription audio
 
 class MyDropdownPage extends StatelessWidget {
@@ -43,6 +44,13 @@ class MyDropdownPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => TranscriptionAudioPage()),
+                  );
+                } 
+                // Redirection vers la page d'informations si "ℹ️ Info" est sélectionné
+                else if (newValue == 'ℹ️Info') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => InfoPage()),
                   );
                 }
               },

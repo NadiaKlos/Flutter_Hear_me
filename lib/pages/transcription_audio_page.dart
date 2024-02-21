@@ -36,6 +36,7 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 20), // Espace entre l'image et le bouton
             ElevatedButton(
               onPressed: _listen,
               child: Text(_isListening ? 'Arrêter' : 'Commencer la transcription'),
@@ -43,10 +44,10 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
             SizedBox(height: 20),
             Text('Texte transcrit : $_text'),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _transcribeViaBluetooth,
-              child: Text('Connexion via Bluetooth'),
-            ),
+            //ElevatedButton(
+              //onPressed: _transcribeViaBluetooth,
+              //child: Text('Connexion via Bluetooth'),
+            //),
           ],
         ),
       ),
@@ -54,6 +55,7 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
         onPressed: _transcribeViaBluetooth,
         child: Icon(Icons.bluetooth),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
@@ -96,10 +98,14 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
           _isListening = true;
         });
         _speechToText.listen(
-          onResult: (result) => setState(() {
-            _text = result.recognizedWords;
-          }),
-          listenFor: Duration(minutes: 1),
+          onResult: (result) {
+            setState(() {
+              _text = result.recognizedWords;
+            });
+            if (result.finalResult) {
+              _listen(); // Appel récursif pour continuer à écouter
+            }
+          },
         );
       }
     } else {
