@@ -22,7 +22,7 @@ class _MyDropdownPageState extends State<MyDropdownPage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 240, 239, 240), 
+          color: Color.fromARGB(255, 255, 255, 255), 
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -36,10 +36,10 @@ class _MyDropdownPageState extends State<MyDropdownPage> {
             ),
             SizedBox(height: 20),
             Text(
-              'Sélectionnez une option :',
+              'Que souaitez-vous faire maintenant ? :',
               style: TextStyle(fontSize: 20),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             DropdownButton<String>(
               items: <String>['📝 Transcription', '📉 Statistiques', 'ℹ️ Info']
                   .map((String value) {
@@ -78,12 +78,12 @@ class _MyDropdownPageState extends State<MyDropdownPage> {
               hint: Text('Sélectionnez une option'),
               isExpanded: true,
               icon: Icon(Icons.arrow_drop_down),
-              iconSize: 24,
-              elevation: 16,
-              style: TextStyle(color: Colors.deepPurple),
+              iconSize: 4,
+              elevation: 6,
+              style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
               underline: Container(
                 height: 2,
-                color: Colors.deepPurpleAccent,
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
             ),
           ],
