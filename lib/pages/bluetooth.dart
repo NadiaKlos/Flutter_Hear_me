@@ -32,7 +32,7 @@ class _BluetoothConnectPageState extends State<BluetoothConnectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bluetooth Devices'),
+        title: Text('Périphériques Bluetooth🛜'),
       ),
       body: ListView.builder(
         itemCount: devices.length,

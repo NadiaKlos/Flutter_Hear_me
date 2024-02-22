@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'info.dart'; // Importer la classe de votre page d'informations
+import 'statistics.dart'; // Importer la classe de votre page de statistiques
 import 'transcription_audio_page.dart'; // Importer la classe de votre page de transcription audio
 
-class MyDropdownPage extends StatelessWidget {
+class MyDropdownPage extends StatefulWidget {
+  @override
+  _MyDropdownPageState createState() => _MyDropdownPageState();
+}
+
+class _MyDropdownPageState extends State<MyDropdownPage> {
+  int totalConnections = 0;
+  int successfulConnections = 0;
+  int failedConnections = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +41,7 @@ class MyDropdownPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             DropdownButton<String>(
-              items: <String>['📝Transcription', '📉Statistiques', 'ℹ️Info']
+              items: <String>['📝 Transcription', '📉 Statistiques', 'ℹ️ Info']
                   .map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -39,18 +49,29 @@ class MyDropdownPage extends StatelessWidget {
                 );
               }).toList(),
               onChanged: (String? newValue) {
-                // Redirection vers la page de transcription si "Transcription" est sélectionné
-                if (newValue == '📝Transcription') {
+                // Redirection vers la page de transcription si "📝 Transcription" est sélectionné
+                if (newValue == '📝 Transcription') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => TranscriptionAudioPage()),
                   );
                 } 
                 // Redirection vers la page d'informations si "ℹ️ Info" est sélectionné
-                else if (newValue == 'ℹ️Info') {
+                else if (newValue == 'ℹ️ Info') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => InfoPage()),
+                  );
+                }
+                // Redirection vers la page de statistiques si "📉 Statistiques" est sélectionné
+                else if (newValue == '📉 Statistiques') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => StatisticsPage(
+                      totalConnections: totalConnections,
+                      successfulConnections: successfulConnections,
+                      failedConnections: failedConnections,
+                    )),
                   );
                 }
               },
