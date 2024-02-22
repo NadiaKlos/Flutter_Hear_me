@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+
+import 'bluetooth.dart'; // Importez le fichier où se trouve la classe BluetoothConnectPage
+
+void main() {
+  runApp(MaterialApp(
+    home: TranscriptionAudioPage(),
+  ));
+}
 
 class TranscriptionAudioPage extends StatefulWidget {
   @override
@@ -14,6 +21,8 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
 
   @override
   Widget build(BuildContext context) {
+    final bluetoothConnectPage = BluetoothConnectPage(); // Créez une instance de la nouvelle page BluetoothConnectPage
+
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -44,46 +53,20 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
             SizedBox(height: 20),
             Text('Texte transcrit : $_text'),
             SizedBox(height: 20),
-            //ElevatedButton(
-              //onPressed: _transcribeViaBluetooth,
-              //child: Text('Connexion via Bluetooth'),
-            //),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _transcribeViaBluetooth,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => bluetoothConnectPage),
+          );
+        },
         child: Icon(Icons.bluetooth),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
-  }
-
-  void _transcribeViaBluetooth() async {
-    FlutterBlue flutterBlue = FlutterBlue.instance;
-  
-    // Récupérer les périphériques Bluetooth disponibles
-    List<BluetoothDevice> devices = [];
-    flutterBlue.startScan(timeout: Duration(seconds: 60));
-    flutterBlue.scanResults.listen((List<ScanResult> results) {
-      for (ScanResult result in results) {
-        devices.add(result.device);
-      }
-    });
-
-    // Arrêter la recherche après un certain temps (par exemple, 10 secondes)
-    await Future.delayed(Duration(seconds: 60));
-    flutterBlue.stopScan();
-  
-    // Afficher les périphériques Bluetooth disponibles
-    for (BluetoothDevice device in devices) {
-      print('Nom: ${device.name}, Adresse: ${device.id}');
-      // Vous pouvez afficher ces périphériques dans une liste ou un autre widget
-    }
-  
-    // Sélectionner un périphérique à connecter
-    // Par exemple, vous pouvez afficher une liste des périphériques disponibles et permettre à l'utilisateur de sélectionner celui qu'il souhaite connecter.
-    // Une fois que l'utilisateur sélectionne un périphérique, vous pouvez établir la connexion à ce périphérique.
   }
 
   void _listen() async {
@@ -115,10 +98,4 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
       });
     }
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: TranscriptionAudioPage(),
-  ));
 }

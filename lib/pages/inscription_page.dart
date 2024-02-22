@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hear_me/pages/login_page.dart';
+import 'package:hear_me_210/pages/login_page.dart';
 
 class InscriptionPage extends StatefulWidget {
   @override

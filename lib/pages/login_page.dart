@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart'; // Importer GoogleSignIn
-import 'package:hear_me/pages/transcription_audio_page.dart';
+import 'package:hear_me_210/pages/menu_deroulant.dart';
 
 import 'inscription_page.dart'; // Importer la page d'inscription
 
@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
       if (googleUser != null) {
         print('Connecté avec Google: ${googleUser.displayName}');
         // Rediriger l'utilisateur vers la page suivante après la connexion réussie
-         Navigator.push(context, MaterialPageRoute(builder: (context) => TranscriptionAudioPage()));
+         Navigator.push(context, MaterialPageRoute(builder: (context) => MyDropdownPage()));
       } else {
         print('Connexion avec Google annulée');
       }
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
           .signInWithEmailAndPassword(email: email, password: password);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => TranscriptionAudioPage()),
+        MaterialPageRoute(builder: (context) => MyDropdownPage()),
       );
     } on FirebaseAuthException catch (e) {
       // if (e.code == 'unknown') {
@@ -125,10 +125,10 @@ class _LoginPageState extends State<LoginPage> {
                 );
               },
               child: Text('Pas encore de compte ?'), // Texte ajouté
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(255, 7, 23, 36)), // Couleur du texte en bleu
-              ),
+              //style: ButtonStyle(
+                //foregroundColor: MaterialStateProperty.all<Color>(
+                    //const Color.fromARGB(255, 7, 23, 36)),
+             // ),
             ),
             SizedBox(height: 20), // Espacement augmenté entre les boutons
             ElevatedButton(
