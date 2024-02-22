@@ -22,13 +22,13 @@ class _MyDropdownPageState extends State<MyDropdownPage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 255, 255, 255), 
+          color: Color.fromARGB(255, 255, 255, 255),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 200, // Hauteur de l'image
+              height: 300, 
               child: Image.asset(
                 'lib/assets/interrogation.png',
                 fit: BoxFit.cover,
@@ -36,11 +36,11 @@ class _MyDropdownPageState extends State<MyDropdownPage> {
             ),
             SizedBox(height: 20),
             Text(
-              'Que souaitez-vous faire maintenant ? :',
-              style: TextStyle(fontSize: 20),
+              'Que souhaitez-vous faire maintenant ? :',
+              style: TextStyle(fontSize:16),
             ),
-            SizedBox(height: 20),
-            DropdownButton<String>(
+            SizedBox(height: 30),
+            DropdownButtonFormField<String>(
               items: <String>['📝 Transcription', '📉 Statistiques', 'ℹ️ Info']
                   .map((String value) {
                 return DropdownMenuItem<String>(
@@ -55,7 +55,7 @@ class _MyDropdownPageState extends State<MyDropdownPage> {
                     context,
                     MaterialPageRoute(builder: (context) => TranscriptionAudioPage()),
                   );
-                } 
+                }
                 // Redirection vers la page d'informations si "ℹ️ Info" est sélectionné
                 else if (newValue == 'ℹ️ Info') {
                   Navigator.push(
@@ -75,15 +75,28 @@ class _MyDropdownPageState extends State<MyDropdownPage> {
                   );
                 }
               },
-              hint: Text('Sélectionnez une option'),
-              isExpanded: true,
-              icon: Icon(Icons.arrow_drop_down),
-              iconSize: 4,
-              elevation: 6,
-              style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
-              underline: Container(
-                height: 2,
-                color: Color.fromARGB(255, 0, 0, 0),
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                filled: true,
+                fillColor: Color.fromARGB(255, 255, 255, 255),
+                hintText: 'Sélectionnez une option',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: const Color.fromARGB(0, 0, 0, 0),
+                    width: 1.0,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(0, 0, 0, 0),
+                    width: 2.0,
+                  ),
+                ),
               ),
             ),
           ],
