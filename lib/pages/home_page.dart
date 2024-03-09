@@ -21,52 +21,54 @@ Widget build(BuildContext context) {
       ),
       centerTitle: true,
     ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'lib/assets/ecoute_logo.png',
-              width: 500,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Navigation vers la page de connexion
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-              child: Text('Se connecter'),
-            ),
-            SizedBox(height: 16),
-            TextButton(
-              onPressed: () {
-                // Navigation vers la page d'inscription
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => InscriptionPage()),
-                );
-              },
-              child: Text('S\'inscrire'),
-            ),
-            SizedBox(height: 16),
-            TextButton(
-              onPressed: () {
-                // Navigation vers la page avec le menu déroulant
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyDropdownPage()),
-                );
-              },
-              child: Text('Se connecter en mode invité'),
-              
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 14, 103, 18)),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'lib/assets/ecoute_logo.png',
+                width: 500,
               ),
-            ),
-          ],
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  // Navigation vers la page de connexion
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                },
+                child: Text('Se connecter'),
+              ),
+              SizedBox(height: 16),
+              TextButton(
+                onPressed: () {
+                  // Navigation vers la page d'inscription
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => InscriptionPage()),
+                  );
+                },
+                child: Text('S\'inscrire'),
+              ),
+              SizedBox(height: 16),
+              TextButton(
+                onPressed: () {
+                  // Navigation vers la page avec le menu déroulant
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyDropdownPage()),
+                  );
+                },
+                child: Text('Se connecter en mode invité'),
+                
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 14, 103, 18)),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
