@@ -17,6 +17,7 @@ dependencies:
   flutter_blue: 0.8.0
   cloud_firestore: ^4.15.4
   cupertino_icons: ^1.0.2
+  flutter_blue_plus: ^1.31.16
 
 dev_dependencies:
   flutter_test:
