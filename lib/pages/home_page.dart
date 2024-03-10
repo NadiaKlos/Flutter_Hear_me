@@ -1,39 +1,44 @@
 import 'package:flutter/material.dart';
 
-import 'inscription_page.dart'; // Importer la classe de votre page d'inscription
-import 'login_page.dart'; // Importer la classe de votre page de connexion
+import 'inscription_page.dart';
+import 'login_page.dart';
 import 'menu_deroulant.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: Text(
-        "Bienvenue",
-        textAlign: TextAlign.center, // Centrer le texte
-        style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Container(
+          margin: EdgeInsets.only(top: 50), // Ajuster la valeur pour la position verticale souhaitée du titre
+          child: Text(
+            "",
+            textAlign: TextAlign.center, 
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
+        centerTitle: true,
       ),
-      centerTitle: true,
-    ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'lib/assets/ecoute_logo.png',
-                width: 500,
+              Container(
+                margin: EdgeInsets.only(top: 100), // Ajuster la valeur pour la position verticale souhaitée du logo
+                child: Image.asset(
+                  'lib/assets/logo_app.jpg',
+                  width: 300,
+                ),
               ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Navigation vers la page de connexion
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LoginPage()),
@@ -44,7 +49,6 @@ Widget build(BuildContext context) {
               SizedBox(height: 16),
               TextButton(
                 onPressed: () {
-                  // Navigation vers la page d'inscription
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => InscriptionPage()),
@@ -55,14 +59,12 @@ Widget build(BuildContext context) {
               SizedBox(height: 16),
               TextButton(
                 onPressed: () {
-                  // Navigation vers la page avec le menu déroulant
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => MyDropdownPage()),
                   );
                 },
                 child: Text('Se connecter en mode invité'),
-                
                 style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 14, 103, 18)),
                 ),

@@ -43,7 +43,7 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
                 content: const SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Text('✅Le bluetooth est déjà activé. Connectez-vous maintenant au périphérique que vous souhaitez.'),
+                      Text('✅Le bluetooth est déjà activé.'),
                       Text('Vous pouvez vous connecter au périphérique Bluetooth que vous souhaitez.'),
                     ],
                   ),
@@ -112,7 +112,7 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
         title: Column(
           children: [
             SizedBox(height: 20), // Space between the title and the image
-            Text('Transcription Audio en Texte'),
+            Text('Transcription'),
           ],
         ),
         centerTitle: true,
@@ -149,9 +149,9 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
                 onPressed: _clearText,
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                      Colors.red), // Red background color for the button
+                      Color.fromARGB(255, 212, 124, 124)), // Red background color for the button
                 ),
-                child: Text('Effacer le texte transcrit'),
+                child: Text('🔃Recommencer'),
               ),
             ],
           ),
