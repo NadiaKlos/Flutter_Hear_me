@@ -10,9 +10,9 @@ class MyDropdownPage extends StatefulWidget {
 }
 
 class _MyDropdownPageState extends State<MyDropdownPage> {
-  int totalConnections = 0;
-  int successfulConnections = 0;
-  int failedConnections = 0;
+  //int totalConnections = 0;
+  //int successfulConnections = 0;
+  //int failedConnections = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _MyDropdownPageState extends State<MyDropdownPage> {
             ),
             SizedBox(height: 30),
             DropdownButtonFormField<String>(
-              items: <String>['📝 Transcription', '📉 Statistiques', 'ℹ️ Info']
+              items: <String>['📝 Transcription', '❓Le saviez-vous ?', '📞Contactez-nous']
                   .map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -56,21 +56,21 @@ class _MyDropdownPageState extends State<MyDropdownPage> {
                     MaterialPageRoute(builder: (context) => TranscriptionAudioPage()),
                   );
                 }
-                // Redirection vers la page d'informations si "ℹ️ Info" est sélectionné
-                else if (newValue == 'ℹ️ Info') {
+                // Redirection vers la page d'informations si "📞Contactez-nous" est sélectionné
+                else if (newValue == '📞Contactez-nous') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => InfoPage()),
                   );
                 }
-                // Redirection vers la page de statistiques si "📉 Statistiques" est sélectionné
-                else if (newValue == '📉 Statistiques') {
+                // Redirection vers la page de statistiques si "❓Le saviez-vous ?" est sélectionné
+                else if (newValue == '❓Le saviez-vous ?') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => StatisticsPage(
-                      totalConnections: totalConnections,
-                      successfulConnections: successfulConnections,
-                      failedConnections: failedConnections,
+                      //totalConnections: totalConnections,
+                      //successfulConnections: successfulConnections,
+                      //failedConnections: failedConnections,
                     )),
                   );
                 }

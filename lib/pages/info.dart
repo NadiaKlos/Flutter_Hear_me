@@ -21,7 +21,7 @@ class InfoPage extends StatelessWidget {
             SizedBox(height: 20),
             ListTile(
               leading: Icon(Icons.email),
-              title: Text('Email: nadia.godje@edu.devinci.fr'),
+              title: Text('Email: contact@outlook.fr'),
             ),
             ListTile(
               leading: Icon(Icons.phone),
@@ -29,7 +29,7 @@ class InfoPage extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.location_on),
-              title: Text('Adresse: 12 Av. Léonard de Vinci, 92000, Courbevoie'),
+              title: Text('Adresse: 210 Av. du Projet , 92000, Courbevoie'),
             ),
           ],
         ),

@@ -60,7 +60,9 @@ flutter:
     - lib/assets/ecoute_logo.png
     - lib/assets/audi_en_texte.png
     - lib/assets/interrogation.png
-  #   - images/a_dot_ham.jpeg
+    - lib/assets/audioton-oms.png
+    - lib/assets/journee_mond_audi.png
+  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

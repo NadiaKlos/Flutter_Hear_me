@@ -43,7 +43,8 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
                 content: const SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Text('Le bluetooth est déjà activé'),
+                      Text('✅Le bluetooth est déjà activé. Connectez-vous maintenant au périphérique que vous souhaitez.'),
+                      Text('Vous pouvez vous connecter au périphérique Bluetooth que vous souhaitez.'),
                     ],
                   ),
                 ),
@@ -61,8 +62,8 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
                 content: const SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Text("Le bluetooth n'est pas encore activé"),
-                      Text("Veuillez l'activer dans les paramètres"),
+                      Text("❌Le bluetooth n'est pas encore activé !"),
+                      Text("Veuillez l'activer dans les paramètres et vous connecter au périphérique souhaité."),
                     ],
                   ),
                 ),
@@ -81,7 +82,7 @@ class _TranscriptionAudioPageState extends State<TranscriptionAudioPage> {
 
   void _startScan() async{
     print('starttttt');
-    var subscription =
+    //var subscription =
         FlutterBluePlus.adapterState.listen((BluetoothAdapterState state) {
       print('stateeeeee $state');
       if (state == BluetoothAdapterState.on) {
